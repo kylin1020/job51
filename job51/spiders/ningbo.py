@@ -178,6 +178,7 @@ class Ningbo(RedisSpider):
     
 
     def parse_detail(self, response):
+        self.logger.debug('正在爬取({})详细页信息'.format(response.request.url))
         item = response.meta['item']
         industry = response.xpath('//p[@class="ltype"]/a/text()').getall()
         address = response.xpath('//a[@class="icon_b i_map"]/@onclick').get()
@@ -202,6 +203,7 @@ class Ningbo(RedisSpider):
             )
         
     def parse_map(self, response):
+        self.logger.debug('正在爬取({})地图数据'.format(response.request.url))
         longitude = re.search(r'lng:"(.*?)"', response.text)
         if longitude:
             longitude = longitude.group(1)
