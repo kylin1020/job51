@@ -141,6 +141,8 @@ class Ningbo(RedisSpider):
         links = response.xpath('//div[@class="dw_table"]/div[@class="el"]')
         for link in links:
             item = Job51CompanyIndustry()
+            item['tag'] = self.tag
+            item['city'] = self.city
             company_name = link.xpath('./span/a/@title').get()
             item['url'] = link.xpath('./span/a/@href').get()
             item['company_name'] = company_name
