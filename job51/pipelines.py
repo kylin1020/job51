@@ -23,9 +23,9 @@ class MongoPipelines(object):
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-            crawler.engine.setting.get('MONGO_HOST'),
-            crawler.engine.setting.get('MONGO_PORT'),
-            crawler.engine.setting.get('MONGO_DB')
+            crawler.setting.get('MONGO_HOST'),
+            crawler.setting.get('MONGO_PORT'),
+            crawler.setting.get('MONGO_DB')
         )
 
     def process_item(self, item, spider):
