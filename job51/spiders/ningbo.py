@@ -174,6 +174,10 @@ class Ningbo(RedisSpider):
                 meta={'item': item},
                 callback=self.parse_detail
             )
+
+        if '没有找到符合你条件的职位' in response.text:
+            self.logger.debug('没有找到符合条件的职位')
+            return
         
         if not links:
             self.logger.debug('出现异常({})'.format(response.url))
