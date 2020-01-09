@@ -187,7 +187,7 @@ class Ningbo(RedisSpider):
         map_url = None
         address = None
         if map_data:
-            address = re.search(r'\'(.*?)\'\);', map_data)
+            address = re.search(r',\'(.*?)\'\);', map_data)
             if address:
                 address = address.group(1)
             map_url = re.search(r'\(\'(.*?)\',', map_data)
@@ -195,7 +195,7 @@ class Ningbo(RedisSpider):
                 map_url = map_url.group(1)
         category = []
         category_industry_map = {}
-        for cate_name in category:
+        for cate_name in industry:
             c = self.find_category(cate_name)
             if c:
                 category.append(c)
