@@ -21,11 +21,11 @@ class MongoPipelines(object):
         self.mongo_db = pymongo.MongoClient(host=host, port=port)[db]
 
     @classmethod
-    def from_crawler(cls, engine):
+    def from_crawler(cls, crawler):
         return cls(
-            engine.setting.get('MONGO_HOST'),
-            engine.setting.get('MONGO_PORT'),
-            engine.setting.get('MONGO_DB')
+            crawler.engine.setting.get('MONGO_HOST'),
+            crawler.engine.setting.get('MONGO_PORT'),
+            crawler.engine.setting.get('MONGO_DB')
         )
 
     def process_item(self, item, spider):

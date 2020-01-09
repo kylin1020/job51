@@ -208,7 +208,7 @@ class Ningbo(RedisSpider):
         
     def parse_map(self, response):
         self.logger.debug('正在爬取({})地图数据'.format(response.request.url))
-        longitude = re.search(r'lng:"(.*?)"', response.text)
+        longitude = re.search(r'lng:"(.*?)"', response.text)    
         if longitude:
             longitude = longitude.group(1)
         latitude = re.search(r'lat:"(.*?)"', response.text)
