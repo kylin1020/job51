@@ -28,3 +28,5 @@ class Job51CompanyIndustry(scrapy.Item):
     create_time = scrapy.Field()
     url = scrapy.Field()
     category_industry_map = scrapy.Field()
+    position = scrapy.Field()
+    
