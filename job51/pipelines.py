@@ -38,8 +38,7 @@ class MongoPipelines(object):
     def handle_company_industry(self, item):
         remote_item = self.mongo_db[Job51CompanyIndustry.__name__].find_one(
                 {
-                    'url': item['url'],
-                    'tag': item['tag']
+                    'url': item['url']
                 }
             )
         if remote_item is None:
