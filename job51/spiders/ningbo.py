@@ -156,6 +156,7 @@ class Ningbo(RedisSpider):
             item = Job51CompanyIndustry()
             item['tag'] = self.tag
             item['city'] = self.city
+            item['position'] = link.xpath('./p/span/a/@title').get()
             company_name = link.xpath('./span/a/@title').get()
             item['url'] = link.xpath('./span/a/@href').get()
             item['company_name'] = company_name
@@ -164,10 +165,10 @@ class Ningbo(RedisSpider):
             if district_name:
                 district_name = self.district_map.get(district_name.group(1))
             item['district_name'] = district_name
-            remote_item = self.mongo_db[Job51CompanyIndustry.__name__].find_one({'url': item['url']})
-            if remote_item is not None:
-                self.logger.debug('该公司({})已有爬取记录'.format(company_name))
-                continue
+            # remote_item = self.mongo_db[Job51CompanyIndustry.__name__].find_one({'url': item['url']})
+            # if remote_item is not None:
+            #     self.logger.debug('该公司({})已有爬取记录'.format(company_name))
+            #     continue
             yield scrapy.Request(
                 url=item['url'],
                 dont_filter=True,
