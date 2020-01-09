@@ -190,10 +190,9 @@ class Ningbo(RedisSpider):
             if map_url:
                 map_url = map_url.group(1)
         category = []
-        for ind in industry:
-
         item['industry'] = industry
         item['address'] = address
+        item['category'] = category
         if map_url:
             yield scrapy.Request(
                 url=map_url,
