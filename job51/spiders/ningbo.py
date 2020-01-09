@@ -181,13 +181,14 @@ class Ningbo(RedisSpider):
         self.logger.debug('正在爬取({})详细页信息'.format(response.request.url))
         item = response.meta['item']
         industry = response.xpath('//p[@class="ltype"]/a/text()').getall()
-        address = response.xpath('//a[@class="icon_b i_map"]/@onclick').get()
+        map_data = response.xpath('//a[@class="icon_b i_map"]/@onclick').get()
         map_url = None
-        if address:
-            address = re.search(r'\'(.*?)\'\);', address)
+        address = None
+        if map_data:
+            address = re.search(r'\'(.*?)\'\);', map_data)
             if address:
                 address = address.group(1)
-            map_url = re.search(r'\(\'(.*?)\',', address)
+            map_url = re.search(r'\(\'(.*?)\',', map_data)
             if map_url:
                 map_url = map_url.group(1)
         category = []
