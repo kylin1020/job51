@@ -192,9 +192,18 @@ class Ningbo(RedisSpider):
             if map_url:
                 map_url = map_url.group(1)
         category = []
+        category_industry_map = {}
+        for cate_name in category:
+            c = self.find_category(cate_name)
+            if c:
+                category.append(c)
+                if c not in category_industry_map:
+                    category_industry_map[c] = []
+                category_industry_map[c].append(cate_name)
         item['industry'] = industry
         item['address'] = address
         item['category'] = category
+        item['category_industry_map'] = category_industry_map
         if map_url:
             yield scrapy.Request(
                 url=map_url,
@@ -218,3 +227,9 @@ class Ningbo(RedisSpider):
         item['longitude'] = longitude
         item['latitude'] = latitude
         yield item
+
+
+    def find_category(self, name):
+        for cate in self.category_list:
+            if name in list(cate['category'].values()):
+                return cate['c']
