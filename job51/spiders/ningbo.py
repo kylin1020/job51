@@ -201,6 +201,9 @@ class Ningbo(RedisSpider):
                 meta={'item': item},
                 callback=self.parse_map
             )
+        else:
+            self.logger.debug('获取详细页中的地图链接失败({})'.format(response.request.url))
+            self.logger.debug(dict(item))
         
     def parse_map(self, response):
         self.logger.debug('正在爬取({})地图数据'.format(response.request.url))
