@@ -145,7 +145,7 @@ class Ningbo(RedisSpider):
             item['url'] = link.xpath('./span/a/@href').get()
             item['company_name'] = company_name
             item['release_time'] = link.xpath('./span[@class="t5"]/text()').get()
-            item[''] = link.xpath('./span[@class="t3"]/text()').get()
+            item['district_name'] = link.xpath('./span[@class="t3"]/text()').get()
             remote_item = self.mongo_db[Job51CompanyIndustry.__name__].find_one({'url': item['url']})
             if remote_item is not None:
                 self.logger.debug('该公司({})已有爬取记录'.format(company_name))
@@ -189,6 +189,8 @@ class Ningbo(RedisSpider):
             map_url = re.search('r(\'(.*?)\',', address)
             if map_url:
                 map_url = map_url.group(1)
+        category = []
+        for ind in industry:
 
         item['industry'] = industry
         item['address'] = address
