@@ -133,6 +133,19 @@ class Ningbo(RedisSpider):
     ]
     tag = 'ningbo'
     city = '宁波'
+    district_map = {
+        '080301': '海曙区',
+        '080303': '江北区',
+        '080304': '北仑区',
+        '080305': '镇海区',
+        '080306': '鄞州区',
+        '080307': '慈溪市',
+        '080308': '余姚市',
+        '080309': '奉化区',
+        '080310': '宁海县',
+        '080311': '象山县',
+        '080312': '高新区'
+    }
 
     mongo_db = pymongo.MongoClient(host=MONGO_HOST, port=MONGO_PORT)[MONGO_DB]
 
@@ -147,7 +160,10 @@ class Ningbo(RedisSpider):
             item['url'] = link.xpath('./span/a/@href').get()
             item['company_name'] = company_name
             item['release_time'] = link.xpath('./span[@class="t5"]/text()').get()
-            item['district_name'] = link.xpath('./span[@class="t3"]/text()').get()
+            district_name = re.search(r'080300,(\d+),0000', response.request.url)
+            if district_name:
+                district_name = self.district_map.get(district_name.group(1))
+            item['district_name'] = district_name
             remote_item = self.mongo_db[Job51CompanyIndustry.__name__].find_one({'url': item['url']})
             if remote_item is not None:
                 self.logger.debug('该公司({})已有爬取记录'.format(company_name))
