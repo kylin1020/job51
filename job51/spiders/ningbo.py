@@ -183,10 +183,10 @@ class Ningbo(RedisSpider):
         address = response.xpath('//a[@class="icon_b i_map"]/@onclick').get()
         map_url = None
         if address:
-            address = re.search(r'\'(.*?)\');', address)
+            address = re.search(r'\'(.*?)\'\);', address)
             if address:
                 address = address.group(1)
-            map_url = re.search('r(\'(.*?)\',', address)
+            map_url = re.search(r'\(\'(.*?)\',', address)
             if map_url:
                 map_url = map_url.group(1)
         category = []
