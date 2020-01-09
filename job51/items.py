@@ -29,4 +29,4 @@ class Job51CompanyIndustry(scrapy.Item):
     url = scrapy.Field()
     category_industry_map = scrapy.Field()
     position = scrapy.Field()
-    
+    salary = scrapy.Field()

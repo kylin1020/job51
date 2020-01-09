@@ -161,6 +161,7 @@ class Ningbo(RedisSpider):
             item['url'] = link.xpath('./span/a/@href').get()
             item['company_name'] = company_name
             item['release_time'] = link.xpath('./span[@class="t5"]/text()').get()
+            item['salary'] = link.xpath('./span[@class="t4"]/text()').get()
             district_name = re.search(r'080300,(\d+),0000', response.request.url)
             if district_name:
                 district_name = self.district_map.get(district_name.group(1))
