@@ -69,9 +69,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'job51.pipelines.Job51Pipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'job51.pipelines.MongoPipelines': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
